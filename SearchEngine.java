@@ -6,6 +6,25 @@ class Handler implements URLHandler{
   ArrayList<String> strs = new ArrayList<>();
 
   public String handleRequest(URI url){
+    if(url.getPath().equals("/")){
+      String s = "";
+      if(strs.size()==0){
+        return "Nothing has been searched";
+      }
+      else{
+        for(int i =0; i< strs.size(); i++){
+          if(i < strs.size()-1){
+            s+= strs.get(i)+", ";
+          }
+          else{
+            s+= strs.get(i);
+          }
+      }
+      return "The following has been added: s";
+      }
+      }
+      
+    }
     if (url.getPath().contains("/add")) {
       String[] query = url.getQuery().split("=");
       if(query[0].equals("s")){
