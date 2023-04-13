@@ -37,6 +37,7 @@ class Handler implements URLHandler{
     }
     else if (url.getPath().contains("/search")){
       String[] query = url.getQuery().split("=");
+      if(query[0].equals("s") && query.length<=2){
       ArrayList<String> searched = new ArrayList<>();
       for(int i =0; i<strs.size(); i++){
         if(strs.get(i).contains(query[1])){
@@ -58,6 +59,12 @@ class Handler implements URLHandler{
       }
       return r;
       }
+        
+      }
+      else{
+         return ("Error 404: Not Found!");
+       }
+      
     }
     else{
       return("Error 404: Not Found!");
