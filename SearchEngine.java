@@ -20,7 +20,7 @@ class Handler implements URLHandler{
             s+= strs.get(i);
           }
       }
-      return "The following has been added: s";
+      return "The following has been added: "+s;
       }
       }
       
