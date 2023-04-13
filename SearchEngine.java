@@ -2,20 +2,22 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.*;
 
-class Search implements URLHandler{
+class Handler implements URLHandler{
   ArrayList<String> strs = new ArrayList<>();
-  public String Req(URL url){
+
+  public String handleRequest(URI url){
     if (url.getPath().contains("/add")) {
       String[] query = url.getQuery().split("=");
-      if(query[0].equals("s"){
+      if(query[0].equals("s")){
         strs.add(query[1]);
-        return "Added " +query[i]+ " to the search engine." 
+        return "Added " + query[1]+ " to the search engine." ;
       }
-       else{
-         return "Error 404: Not Found!";
+      else{
+         return ("Error 404: Not Found!");
        }
     }
     else if (url.getPath().contains("/search")){
+      String[] query = url.getQuery().split("=");
       ArrayList<String> searched = new ArrayList<>();
       for(int i =0; i<strs.size(); i++){
         if(strs.get(i).contains(query[1])){
@@ -23,18 +25,23 @@ class Search implements URLHandler{
         }
       }
       if(searched.size()==0){
-        System.out.println("There are no matches");
+        return("There are no matches");
       }
       else{ 
+        String r = "";
         for(int i =0; i< searched.size(); i++){
           if(i < searched.size()-1){
-            System.out.print(searched.get(1)+ ", ");
+            r+= searched.get(i)+", ";
           }
           else{
-            System.out.print(searched.get(1));
+            r+= searched.get(i);
           }
       }
+      return r;
       }
+    }
+    else{
+      return("Error 404: Not Found!");
     }
   }
 }
@@ -47,6 +54,6 @@ class SearchEngine {
 
         int port = Integer.parseInt(args[0]);
 
-        Server.start(port, new Search());
+        Server.start(port, new Handler());
     }
  }
