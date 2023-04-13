@@ -24,7 +24,7 @@ class Handler implements URLHandler{
       }
       }
       
-    }
+    
     if (url.getPath().contains("/add")) {
       String[] query = url.getQuery().split("=");
       if(query[0].equals("s")){
